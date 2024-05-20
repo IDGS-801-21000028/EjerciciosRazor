@@ -7,16 +7,19 @@
 <h1>@ViewData["Title"]</h1>
 
 <form method="post">
-    <button type="submit">Generar Números</button>
+    <button type="submit">Generar Arreglo</button>
 </form>
 
 @if (Model.Numeros != null && Model.Numeros.Length > 0)
 {
-    <h2>Números Generados</h2>
-    <p>@string.Join(", ", Model.Numeros)</p>
+    <h2>Arreglo Aleatorio</h2>
+    <p>@string.Join(" ", Model.Numeros)</p>
+
     <h3>Suma: @Model.Suma</h3>
     <h3>Promedio: @Model.Promedio</h3>
-	 	Máximo: @Model.Maximo
-		Mínimo: @Model.Minimo
-
+    <h3>Moda: @string.Join(", ", Model.Moda)</h3>
+    <h3>Mediana: @Model.Mediana</h3>
+    
+    <h2>Arreglo Ordenado</h2>
+    <p>@string.Join(" ", Model.NumerosOrdenados)</p>
 }
