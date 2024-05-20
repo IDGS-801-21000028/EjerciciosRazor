@@ -1,4 +1,22 @@
-﻿@page
+@page
 @model EjerciciosRazor.Pages.NumeroAleatoriosModel
 @{
+	ViewData["Title"] = "Generador de Números Aleatorios";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <button type="submit">Generar Números</button>
+</form>
+
+@if (Model.Numeros != null && Model.Numeros.Length > 0)
+{
+    <h2>Números Generados</h2>
+    <p>@string.Join(", ", Model.Numeros)</p>
+    <h3>Suma: @Model.Suma</h3>
+    <h3>Promedio: @Model.Promedio</h3>
+	 	Máximo: @Model.Maximo
+		Mínimo: @Model.Minimo
+
 }
