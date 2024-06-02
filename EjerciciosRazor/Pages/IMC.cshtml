@@ -1,30 +1,43 @@
 ﻿@page
 @model EjerciciosRazor.Pages.IMCModel
 @{
-    ViewData["Title"] = "Calculaora de IMC";
+    ViewData["Title"] = "Calculadora de IMC";
 }
+
+<style>
+    .img-res{
+        height: 200px;
+        overflow: hidden;
+        border-radius: .6rem;
+    }
+</style>
 
 <h1>@ViewData["Title"]</h1>
 
-
-<form method="post">
-    <div>
+<form method="post" class="form">
+    <div class="form-group">
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" name="altura" step="0.1" class="form-control" required asp-for="Altura" />
+    </div>
+    <div class="form-group">
         <label for="peso">Peso (kg):</label>
-        <input type="number" id="peso" name="peso" step="0.1" required asp-for="Peso" />       
-    </div>
-    <div>
-        <label for="altura">Altura (m):</label>
-        <input type="number" id="altura" name="altura" step="0.1" required asp-for="Altura" />
-    </div>
-    <button type="submit">Calcular</button>
+        <input type="number" id="peso" name="peso" step="0.1" class="form-control" required asp-for="Peso" />
+    </div>    
+    <button type="submit" class="btn btn-primary">Calcular</button>
 </form>
 
 @if (Model.IMC > 0)
 {
-    <h2>Resultado</h2>
-    <p>Su IMC es: @Modelo.IMC</p>
-    <p>Clasificación: @Model.Clasificacion</p>
-    <img src="@Model.ImgReco" alt="Recomendacion"/>
-    
-
+    <div class="mt-2 d-flex justify-content-center gap-5">
+        <div>
+            <h2 class="text-uppercase fw-bold">Resultado</h2>
+            <p><strong>Su IMC es:</strong> @Model.IMC</p>
+        </div>
+        <div>
+            <p><strong>Clasificación:</strong> @Model.Clasificacion</p>
+            <div class="img-res">
+                <img src="@Url.Content(@Model.ImgReco)" alt="Recomendación de Imagen" class="img-fluid" style="height: 100%; width:100%" />
+            </div>
+        </div>
+    </div>
 }

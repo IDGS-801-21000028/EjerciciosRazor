@@ -1,4 +1,87 @@
 ﻿@page
 @model EjerciciosRazor.Pages.EcuacionModel
 @{
+    ViewBag.Title = "Expresión (ax + by)^n";
 }
+
+<h2>Expresión (ax + by)^n</h2>
+
+<form method="post" class="form">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="form-group col-lg-6 m-1">
+            <label for="A">Valor de a:</label>
+            <input type="number" id="A" name="A" step="0.1" class="form-control" required asp-for="A" />
+        </div>
+        <div class="form-group col-lg-6 m-1">
+            <label for="B">Valor de b:</label>
+            <input type="number" class="form-control" name="B" required asp-for="B">
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="form-group col-lg-6 m-1">
+            <label for="X">Valor de x:</label>
+            <input type="number" class="form-control" name="X" required asp-for="X">
+        </div>
+        <div class="form-group col-lg-6 m-1">
+            <label for="Y">Valor de y:</label>
+            <input type="number" class="form-control" name="Y" required asp-for="Y">
+        </div>
+    </div>    
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="form-group col-lg-6 m-1">
+            <label for="N">Valor de n:</label>
+            <input type="number" class="form-control" name="N" required asp-for="N">
+        </div>
+        <button type="submit" class="btn btn-primary col-lg-6 m-1">Calcular</button>
+    </div>
+    
+</form>
+
+@if (Model.resExpr != 0.0)
+{
+    <div class= "mt-2">        
+        <div>
+            <h5>Evaluar:</h5>
+            <p>
+                \[
+                (ax + by)^n = \sum_{k=0}^{n} \binom{n}{k} (ax)^{n-k} (by)^k
+                \]
+            </p>
+        </div>                
+    </div>
+    <div>
+        <h3> Sumatorias </h3>
+
+        @{
+            int i = 0;
+            double suma = 0.0;
+            @foreach (var item in Model.resultados)
+            {
+                <p>
+                    \[
+                    \binom{@Model.N}{@i} = \frac{@Model.N!} { @i !(@Model.N - @i)!} = @item.Value
+                    \]
+                </p>
+                suma += @item.Value;
+                i++;
+            }
+
+            <div>
+                <h3> Resultado:  </h3>
+                <p>
+                    \[
+                    (@Model.A*@Model.X + @Model.B*@Model.Y)^@Model.N = @Model.resExpr
+                    \]
+                </p>
+                <p>
+                    \[
+                    \sum_{k=0}^{n} \binom{n}{k} (ax)^{n-k} (by)^k = @suma
+                    \]
+                </p>
+            </div>
+        }
+    </div>
+    
+}
+
+
